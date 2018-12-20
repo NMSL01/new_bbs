@@ -1,0 +1,193 @@
+{%extends 'bbsapp/base.html'%}
+{%block href%}
+{%load static%}
+        <link rel="stylesheet" href="{%static '/text/css/comment.css'%}">
+        <script>
+            var article_id={
+                'id':{{article.id}},
+            'user_id':{{request.session.login.id}},
+            };
+
+            $(function () {
+                $('.insert_image').click(function () {
+                    var insert=$(".ke-edit-iframe").contents().find('.ke-content')
+                    $('.filelist li img').appendTo(insert)
+                    $('#wrapper').hide()
+                })
+            })
+        </script>
+        <script src="{%static '/text/js/comment.js'%}"></script>
+<script src="{%static '/text/js/kindeditor/kindeditor-all-min.js'%}"></script>
+<script src="{%static '/text/js/kindeditor/lang/zh-CN.js'%}"></script>
+<script src="{%static '/text/js/kindeditor/config.js'%}"></script>
+<!--<link rel="stylesheet" href="{%static '/text/js/webuploader/css//webuploader.css'%}">-->
+<!--<link rel="stylesheet" href="{%static '/text/js/webuploader/examples/image-upload/style.css'%}">-->
+{%endblock href%}
+{%block center%}
+<div class="title">
+    <div class="image_title">
+        <img src="{%static 'text/image/lol_logo.png'%}" alt="">
+    </div>
+    <div class="title_context"><img src="{%static 'text/image/title_content.png'%}" alt=""></div>
+</div>
+<div class="box4">
+
+<div id="center_1" >
+    <div class="title_jieshao">
+        <div class="top_title">
+            <ul>
+                <li><a href="javascript:;">英雄联盟</a><span>|</span></li>
+                <li><a href="javascript:;">炉石传说</a><span>|</span></li>
+                <li><a href="javascript:;">绝地求生</a><span>|</span></li>
+                <li><a href="javascript:;">DATA2</a><span>|</span></li>
+                <li><a href="javascript:;">王者荣耀</a><span>|</span></li>
+                <li><a href="javascript:;">DNF</a><span>|</span></li>
+                <li><a href="javascript:;">步行街</a><span>|</span></li>
+            </ul>
+        </div>
+
+    </div>
+    <div id="out">
+        {%load category_tag%}
+        <div class="d1">
+            <div class="title_article">
+                <div class="title_article_top"><h3>{{article.title}}</h3></div>
+                <ul>
+                    <li><a class="btn btn-default" href="#" role="button">回复</a></li>
+                    <li><a class="btn btn-default" href="#" role="button">收藏</a></li>
+                    <li><a class="btn btn-default" href="#" role="button">只看楼主</a></li>
+                </ul>
+                </div>
+            <div class="left"></div>
+            <div class="right">
+                <div class="right_top">
+                    {{article.content | safe}}
+                </div>
+                <div class="right_bot">
+                    <div class="bot_right" ><a id="louzhu" href="javascript:;" class="louzhu">回复</a></div>
+                    <div class="bot_left">楼主 {{article.startime}}</div>
+                    <div class='comment_child_out_out'>
+                    <div class='comment_child_out'></div>
+                    <div class='comment_load'></div><div class='comment_paginator'></div><div class='comment_input'></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {%if result%}
+        {%for i in result %}
+        <div class="d1">
+            <div class="left"></div>
+            <div class="right">
+                <div class="right_top">
+                    {{i.content | safe}}
+                </div>
+                <div class="right_bot">
+                    <div class="hidd" style="display:none"><a href="javascript:;" id="hidd00{{i.startime.microsecond}}">收起回复</a></div>
+                    <div class="bot_right" ><a id="{{i.id}}" href="javascript:;" class="00{{i.startime.microsecond}}">回复</a></div>
+                    <div class="bot_left">2楼 2018-11-26</div>
+                    <div class='comment_child_out_out'>
+                    <div class='comment_child_out'></div>
+                    <div class='comment_load'></div><div class='comment_paginator'></div><div class='comment_input'></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+        {%else%}
+        该文章没有评论
+        {%endif%}
+
+    </div>
+    <div class="center_right">
+        <div class="center_right_top"></div>
+        <div class="center_right_top"></div>
+        <div class="center_right_top"></div>
+    </div>
+
+</div>
+    <div class="shr_box4"></div>
+    <div class="shl_box4"></div>
+
+    <!--分页-->
+<div id="pagination" style="text-align:center;overflow: hidden">
+    <nav aria-label="Page navigation">
+    <ul id="pages" class="pagination pagination-sm pagination-xs">
+    {%if  is_paginated%}
+    {%if page_obj.number != 1%}
+        <li><a href="?page={{page_obj.number | add:-1}}">上一页</a></li>
+    {%endif%}
+    {% if first %}
+    <li><a href="?page=1">1</a></li>
+    {% endif %} {% if left %} {% if left_dian%}
+    <li><span>...</span></li>
+    {% endif %} {% for i in left %}
+    <li><a href="?page={{ i }}">{{ i }}</a></li>
+    {% endfor %} {% endif %}
+    <li><a href="javascript:;" style="color:#26ceff">{{ page_obj.number }}</a>
+    {% if right %} {% for i in right %}
+    <li><a href="?page={{ i }}">{{ i }}</a></li>
+    {% endfor %} {% if right_dian%}
+    <li><span>...</span></li>
+    {% endif %} {% endif %} {% if last %}
+    <li><a class='current-page' href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a></li>
+    {% endif %}
+    {%if page_obj.number != paginator.num_pages%}
+    <li><a href="?page={{page_obj.number | add:1}}">下一页</a></li>
+    {%endif%}
+    {%endif%}
+    </ul>
+        </nav>
+</div>
+    <div class="comment_bot">
+        <div class="comment_bot_in">
+            <div class="comment_bot_2">
+                <form action="{%url 'bbsapp:comment_submit'%}" method="post">
+                <div class="comment_bot_context">
+                    <textarea name="content" id="id_content" cols="30" rows="10"></textarea>
+                        <button type="submit" class="btn btn-primary btn-sm">发表</button>
+                    <input type="hidden" name="article" value="{{article.id}}">
+                </div>
+                 </form>
+                    <!--&lt;!&ndash;多图上传&ndash;&gt;-->
+   <!--<div id="wrapper">-->
+        <!--<div id="container">-->
+            <!--&lt;!&ndash;头部，相册选择和格式选择&ndash;&gt;-->
+            <!--<div id="uploader">-->
+                <!--<div class="queueList">-->
+                    <!--<div id="dndArea" class="placeholder">-->
+                        <!--<div id="filePicker"></div>-->
+                        <!--<p>或将照片拖到这里，单次最多可选300张</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="statusBar" style="display:none;">-->
+                    <!--<div class="progress">-->
+                        <!--<span class="text">0%</span>-->
+                        <!--<span class="percentage"></span>-->
+                    <!--</div><div class="info"></div>-->
+                    <!--<div class="btns">-->
+                        <!--<div id="filePicker2"></div><div class="uploadBtn">开始上传</div>-->
+                        <!--<a href="javascript:;" class="insert_image">插入图片</a>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+                    <!--&lt;!&ndash;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+                    <!--<script src="{%static '/text/js/webuploader/examples/image-upload/jquery.js'%}"></script>-->
+                    <!--<script src="{%static '/text/js/webuploader/dist/webuploader.js'%}"></script>-->
+                    <!--&lt;!&ndash;<script src="{%static '/text/js/webuploader/examples/image-upload/upload.js'%}"></script>&ndash;&gt;-->
+                    <!--<script src="{%static '/text/js/more_image.js'%}"></script>-->
+                <!--</div>-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock center%}
+
+
+

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport"
+       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <title>Document</title>
+ {%load staticfiles%}
+ <script src="{%static 'text/js/jquery-2.1.3.min.js'%}"></script>
+ <script>
+     function checkUser(data) {
+         var reg = /^[\u4e00-\u9fff\w]{1,16}$/;
+         if (reg.test($(data).val()) == false) {
+
+             $(data).next().html('用户名格式错误!')
+             return false;
+         } else {
+             $(data).next().html('')
+             return true;
+         }
+     }
+
+     /*密码验证*/
+     function checkPwd(data) {
+         var reg = /^[a-zA-Z0-9\.]{4,10}$/;
+         if (reg.test($(data).val()) == false) {
+             $(data).next().html('密码格式错误！')
+             return false;
+         } else {
+             $(data).next().html('')
+             return true;
+         }
+     }
+
+     function checkRepwd(data) {
+         var pwd = $('.pwd').val();
+         if (pwd != $(data).val()) {
+             $(data).next().html('两次密码输入不一致！')
+             return false;
+         } else {
+             $(data).next().html('')
+             return true;
+         }
+     }
+
+     /*验证邮箱*/
+     function checkEmail(data) {
+         var reg = /^\w+@\w+(\.[a-zA-Z]{2,3}){1,2}$/;
+         if (reg.test($(data).val()) == false) {
+             $(data).next().html('邮箱格式错误!')
+             return false;
+         } else {
+             $(data).next().html('')
+             return true;
+         }
+     }
+
+     /*验证手机号码*/
+     // function checkMobile(){
+     //     var mobile=$("mobile");
+     //     var mobileId=divId("mobile_prompt");
+     //     var regMobile=/^1\d{10}$/;
+     //     if(regMobile.test(mobile)==false){
+     //         mobileId.innerHTML="手机号码不正确，请重新输入";
+     //         return false;
+     //         }
+     //         mobileId.innerHTML="";
+     //         return true;
+     //     }
+     //阅读按钮验证
+     function checkcb() {
+         var check = false
+         if ($('.check').attr('checked')) {
+
+             $('.check').nextAll('span:eq(0)').show()
+             check = false;
+
+         } else {
+             $('.check').nextAll('span:eq(0)').hide()
+             check = true;
+         }
+         return check;
+     }
+     function send_user(data) {
+        if($(data).next().html()==''){
+
+            username=$(data).val()
+            $.get('/register',{'username':username},function (data_2) {
+                $(data).next().html(data_2.errors)
+            })
+            return true
+        }
+     }
+     function last() {
+        $.each($('span'),function (index,index2) {
+           if(index2.val()!=''){
+               return false
+           }
+           return true
+        })
+     }
+
+     //提交前静态验证
+     function check() {
+         var check = checkUser('.username') && checkPwd('.pwd') && checkRepwd('.repwd') && checkcb('.check') && last();
+         return check;
+
+     }
+ </script>
+
+</head>
+<body>
+<form action="/register" method="post" onsubmit="return check()">
+ <fieldset>
+  <legend>
+   表单验证小例子
+  </legend>
+  <h3>
+   请输入信息
+  </h3>
+  <label>
+   用户名：
+  </label>
+  <input type="text" class="username" name="username" onkeyup="checkUser('.username')" onchange="send_user('.username')"/>
+  <span ></span>
+  <br/>
+
+  <label for="">邮箱:</label>
+  <input type="text"  name="email" class="email" onkeyup="checkEmail('.email')" onchange="send_user('.email')">
+  <span ></span>
+  <br>
+
+  <label>
+   密码：
+  </label>
+  <input type="password" class="pwd" name="password"
+         onkeyup="checkPwd('.pwd')" />
+  <span ></span>
+  <br/>
+  <label>
+   确认密码：
+  </label>
+  <input type="password" class="repwd" name="pwdc" onkeyup="checkRepwd('.repwd')"/>
+  <span ></span>
+  <br/>
+
+  <input type="checkbox" name="checkbox" class="check" onclick="checkcb()"/>
+  <label>
+   我已经阅读了XX条款并不能同意得更多
+  </label>
+  <span hidden>清阅读</span>
+  <br/>
+
+  <input type="submit" value="走！"/>
+ </fieldset>
+</form>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

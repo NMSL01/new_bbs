@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/DjangoUeditor" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/TunSafe" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/bbs/bbsapp/DjangoUeditor" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/bbs/static/text/js/kindeditor" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/kindeditor" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/shop/static/kindeditor" vcs="Git" />
+  </component>
+</project>

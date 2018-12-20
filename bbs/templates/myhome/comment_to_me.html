@@ -1,0 +1,26 @@
+{%extends 'myhome/home.html'%}
+{%block article%}
+{%load myhome_tag%}
+	{%for list in result%}
+		{%get_comment list as result_2%}
+     <article class="excerpt excerpt-1" style="">
+		<header><a class="cat" href="javascript:;" title="MZ-NetBlog主题" >{{list.startime}}<i></i></a>
+			<h2><a href="{{result_2.article.get_absolute_url}}" title="" target="_blank" >{{list.user.username}} 回复:{{list.to_user.username}}: {{result_2.content | safe}}</a>
+			</h2>
+		</header>
+		<p class="meta">
+			   {%if result_2.sign == 1%}
+			<a href="{{result_2.article.get_absolute_url}}" target="_blank"><time class="time"><i class="glyphicon glyphicon-time"></i>在我的帖子中:{{result_2.article.title}}</a>&gt&nbsp<a href="{{result_2.category.get_absolute_url}}">{{result_2.category.name}}(板块)</a></time>
+			{%else%}
+			<a href="{{result_2.article.get_absolute_url}}" target="_blank"><time class="time"><i class="glyphicon glyphicon-time"></i>我在主题：&gt&gt{{result_2.article.title}}&nbsp&nbsp:</a>回复：&gt&nbsp<a href="{{result_2.category.get_absolute_url}}">{{result_2.category.name}}(板块)</a></time>
+            {%endif%}
+		</p>
+	</article>
+	{%empty%}
+<br>
+<br>
+<br>
+	<p style="font-size: 18px;color: red">还没有回复过别人哦!</p>
+
+	{%endfor%}
+{%endblock article%}

@@ -1,0 +1,22 @@
+{%extends 'myhome/home.html'%}
+{%block article%}
+{%load myhome_tag%}
+		{%get_article user as result_2%}
+            {%for time,content,article in result_2%}
+             <article class="excerpt excerpt-1" style="">
+            <header><a class="cat" href="javascript:;" title="MZ-NetBlog主题" >{{time}}<i></i></a>
+			<h2><a href="{{article.get_absolute_url}}" title="" target="_blank" >{{content}}</a>
+			</h2>
+            </header>
+	</article>
+	{%empty%}
+<br>
+<br>
+<br>
+	<p style="font-size: 18px;color: red">还没有回复过别人哦!</p>
+
+	{%endfor%}
+
+{%endblock article%}
+
+

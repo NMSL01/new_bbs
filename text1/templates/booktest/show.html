@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span{
+            text-indent: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        {%for hero in list%}
+        <li>{{hero.hname}}:<span> {{hero.hcontent}}</span></li>
+        {%endfor%}
+    </ul>
+</body>
+</html>

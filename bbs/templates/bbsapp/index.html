@@ -1,0 +1,272 @@
+{% extends "bbsapp/base.html" %}
+{%load static%}
+{%block href%}
+	<script src="{%static 'text/js/slide.js'%}"></script>
+	<link rel="stylesheet" href="{%static 'text/css/index.css'%}">
+	<script src="{%static 'text/js/load.js'%}"></script>
+	<script src="{%static 'text/js/index.js'%}"></script>
+
+{%endblock href%}
+
+
+{%block center%}
+
+
+		<div class="center ">
+			<div class="center_2 ">
+				<div class="left ">
+					<ul>
+						<div id='left_nav1'>
+							<li>
+								<a href="javascript:;">首页</a>
+							</li>
+						</div>
+						<!--首页板块页面通过自定义标签获取-->
+						{%load category_tag%}
+                        {%get_category_id as get_category_id%}
+						{%for list in get_category_id%}
+						<div id='left_nav'>
+							<li>
+								<a href="{{list.get_absolute_url}}" target="_blank">{{list.name}}</a>
+							</li>
+						</div>
+						{%endfor%}
+
+					</ul>
+				</div>
+				<div class="right ">
+					<div class="right_left ">
+						<div class="slide fl ">
+							<ul class="slide_pics">
+								<li><img src="{%static 'text/image/1.jpg'%} " alt="幻灯片 "><span>Faker合同期到去还是留？　｜独家分析</span></li>
+								<li><img src="{%static 'text/image/2.jpg'%} " alt="幻灯片 "><span>Faker合同期到去还是留？　｜独家分析</span></li>
+								<li><img src="{%static 'text/image/3.jpg'%} " alt="幻灯片 "><span>Faker合同期到去还是留？　｜独家分析</span></li>
+								<li><img src="{%static 'text/image/4.jpg'%} " alt="幻灯片 "></li>
+								<li><img src="{%static 'text/image/5.jpg'%} " alt="幻灯片 "></li>
+							</ul>
+							<div class="prev "></div>
+							<div class="next "></div>
+							<ul class="points ">
+							</ul>
+						</div>
+						<div class='right_left_content'>
+							<div id='content_1'>
+								<div class="img_box "></div>
+								<div class="text_box ">
+									<h4>独立游戏《Bad North》steam版发售</h4>
+									<span>带有Roguelike元素的实时策略独立游戏《Bad North》在steam发售，游戏自带中文，评价特别好评，游戏正在促销中，国区售价45元。</span>
+								</div>
+								<div class='from_who'>
+									<div class='from_who_img'><img src='{%static "text/image/pic1.jpg"%}'></div>
+									<div class='from_who_text'>游侠网官方微博 11月17日 14:09</div>
+								</div>
+								<div class="bottom_tool ">
+									<ul>
+										<li>
+											<a href=" "><i class='fa fa-star-o'></i>&nbsp;收藏</a>
+										</li>
+										<li>
+											<a href=" "><i class='fa fa-commenting-o'></i>&nbsp;评论</a>
+										</li>
+										<li>
+											<a href=" "><i class='fa fa-thumbs-o-up'></i>&nbsp;点赞</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div id='content_1'>
+								<div class="img_box "></div>
+								<div class="text_box ">
+									<h4>独立游戏《Bad North》steam版发售</h4>
+									<span>带有Roguelike元素的实时策略独立游戏《Bad North》在steam发售，游戏自带中文，评价特别好评，游戏正在促销中，国区售价45元。</span>
+								</div>
+								<div class='from_who'>
+									<div class='from_who_img'><img src='{%static "text/image/pic1.jpg"%}></div>
+									<div class='from_who_text'>游侠网官方微博 11月17日 14:09</div>
+								</div>
+								<div class="bottom_tool ">
+									<ul>
+										<li>
+											<a href=" "><i class='fa fa-star-o'></i>&nbsp;收藏</a>
+										</li>
+										<li>
+											<a href=" "><i class='fa fa-commenting-o'></i>&nbsp;评论</a>
+										</li>
+										<li>
+											<a href=" "><i class='fa fa-thumbs-o-up'></i>&nbsp;点赞</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div id='content_1'>
+								<div class="img_box "></div>
+								<div class="text_box ">
+									<h4>独立游戏《Bad North》steam版发售</h4>
+									<span>带有Roguelike元素的实时策略独立游戏《Bad North》在steam发售，游戏自带中文，评价特别好评，游戏正在促销中，国区售价45元。</span>
+								</div>
+								<div class='from_who'>
+									<div class='from_who_img'><img src='image/pic1.jpg'></div>
+									<div class='from_who_text'>游侠网官方微博 11月17日 14:09</div>
+								</div>
+								<div class="bottom_tool ">
+									<ul>
+										<li>
+											<a href=" "><i class='fa fa-star-o'></i>&nbsp;收藏</a>
+										</li>
+										<li>
+											<a href=" "><i class='fa fa-commenting-o'></i>&nbsp;评论</a>
+										</li>
+										<li>
+											<a href=" "><i class='fa fa-thumbs-o-up'></i>&nbsp;点赞</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div id='content_1'>
+								<div class="img_box "></div>
+								<div class="text_box ">
+									<h4>独立游戏《Bad North》steam版发售</h4>
+									<span>带有Roguelike元素的实时策略独立游戏《Bad North》在steam发售，游戏自带中文，评价特别好评，游戏正在促销中，国区售价45元。</span>
+								</div>
+								<div class='from_who'>
+									<div class='from_who_img'><img src='image/pic1.jpg'></div>
+									<div class='from_who_text'>游侠网官方微博 11月17日 14:09</div>
+								</div>
+								<div class="bottom_tool ">
+									<ul>
+										<li>
+											<a href=" "><i class='fa fa-star-o'></i>&nbsp;收藏</a>
+										</li>
+										<li>
+											<a href=" "><i class='fa fa-commenting-o'></i>&nbsp;评论</a>
+										</li>
+										<li>
+											<a href=" "><i class='fa fa-thumbs-o-up'></i>&nbsp;点赞</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div id='content_1'>
+								<div class="img_box "></div>
+								<div class="text_box ">
+									<h4>独立游戏《Bad North》steam版发售</h4>
+									<span>带有Roguelike元素的实时策略独立游戏《Bad North》在steam发售，游戏自带中文，评价特别好评，游戏正在促销中，国区售价45元。</span>
+								</div>
+								<div class='from_who'>
+									<div class='from_who_img'><img src='image/pic1.jpg'></div>
+									<div class='from_who_text'>游侠网官方微博 11月17日 14:09</div>
+								</div>
+								<div class="bottom_tool ">
+									<ul>
+										<li>
+											<a href=" "><i class='fa fa-star-o'></i>&nbsp;收藏</a>
+										</li>
+										<li>
+											<a href=" "><i class='fa fa-commenting-o'></i>&nbsp;评论</a>
+										</li>
+										<li>
+											<a href=" "><i class='fa fa-thumbs-o-up'></i>&nbsp;点赞</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div id='content_1'>
+								<div class="img_box "></div>
+								<div class="text_box ">
+									<h4>《Bad North》steam版发售</h4>
+									<span>带有Roguelike元素的实时策略独立游戏《Bad North》在steam发售，游戏自带中文，评价特别好评，游戏正在促销中，国区售价45元。</span>
+								</div>
+								<div class='from_who'>
+									<div class='from_who_img'><img src='image/pic1.jpg'></div>
+									<div class='from_who_text'>游侠网官方微博 11月17日 14:09</div>
+								</div>
+								<div class="bottom_tool ">
+									<ul>
+										<li>
+											<a href=" "><i class='fa fa-star-o'></i>&nbsp;收藏</a>
+										</li>
+										<li>
+											<a href=" "><i class='fa fa-commenting-o'></i>&nbsp;评论</a>
+										</li>
+										<li>
+											<a href=" "><i class='fa fa-thumbs-o-up'></i>&nbsp;点赞</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="right_right ">
+						<div class="input_father">
+							<div class="form_input_con fr">
+								<div class="form_title">
+									<h1>帐号登录</h1> <a href="#">立即注册</a> </div>
+								<!-- <span class
+                               ="error">文字提示</span> -->
+
+								<form>
+									<div class="form_group">
+										<input type="text" name="username" class="input_txt" placeholder="请输入用户名">
+										<!-- <span class="error">文字提示</span> -->
+									</div>
+
+									<div class="form_group">
+										<input type="password" name="pwd" class="input_pwd" placeholder="请输入密码">
+										<!-- <span class="error">文字提示</span> -->
+									</div>
+
+									<div class="form_group" id="form_group_1">
+										<input type="checkbox" name="remember" id="remember" class="input_check fl">
+										<label for="remember" class="fl">记住用户名</label>
+										<a href="#" class="find_pass fr">忘记密码</a>
+									</div>
+
+									<input type="submit" name="" value="登 录" class="input_sub">
+									<div class="bottom_login">
+										<span id="login">其他登录:</span> <a href="#" title="qq登录"><img src="./image/搜狗截图18年11月20日1614_1.png" alt=""></a>
+										<a href="#" title="淘宝登录"><img src="./image/搜狗截图18年11月20日1614_2.png" alt=""></a>
+									</div>
+
+
+								</form>
+							</div>
+						</div>
+						<div class="right_right_bo">
+							<div class="right_right_h2">
+								<h2>热门跟帖</h2>
+							</div>
+							<div class="bo_1_father">
+								<div class="bo1">
+									<div class="bo_2"><a href="">炉石传说新卡发布时间确定!</a><br><span>今天: 14时05分</span>
+									</div>
+								</div>
+								<div class="bo_3">
+									<img src="{%static 'text/image/03.png'%}" alt="">
+								</div>
+							</div>
+							<div class="bo_1_father">
+
+								<div class="bo1">
+									<div class="bo_2"><a href="">炉石传说新卡发布时间确定!</a><br><span>今天: 14时05分</span>
+									</div>
+								</div>
+								<div class="bo_3">
+									<img src="./image/03.png" alt="">
+								</div>
+							</div>
+							<div class="bo_1_father">
+								<div class="bo1">
+									<div class="bo_2"><a href="">炉石传说新卡发布时间确定!</a><br><span>今天: 14时05分</span>
+									</div>
+								</div>
+								<div class="bo_3">
+									<img src="./image/03.png" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+{%endblock center%}
+

@@ -1,0 +1,98 @@
+{%extends 'blogapp/base.html'%} {%block center%} {%for list in post%}
+<article class="post post-{{list.pk}}">
+    <header class="entry-header">
+        <h1 class="entry-title">
+            <a href="{{list.get_absolute_url}}">{{list.title}}</a>
+        </h1>
+        <div class="entry-meta">
+            <span class="post-category"><a href="{{list.get_absolute_url}}">{{list.category.name}}</a></span>
+            <span class="post-date"><a href="{{list.get_absolute_url}}"><time class="entry-date" datetime="{{list.startime}}">{{list.startime}}</time></a></span>
+            <!-- #作者 -->
+            <span class="post-author"><a href="{{list.get_absolute_url}}">{{list.user}}</a></span>
+            <span class="comments-link"><a href="{{list.get_absolute_url}}">{{list.comment_set.count}} 评论</a></span>
+            <span class="views-count"><a href="{{list.get_absolute_url}}">{{list.views}}阅读</a></span>
+        </div>
+    </header>
+    <div class="entry-content clearfix">
+        <!-- 摘要 -->
+        <p>{{list.other}}.....</p>
+
+        <div class="read-more cl-effect-14">
+            <a href="{{list.get_absolute_url}}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
+        </div>
+    </div>
+</article>
+{%empty%}
+<div class="no-post">暂时没有文章发布哦!</div>
+{%endfor%}
+
+
+{% if is_paginated %}
+<div id="pagination" style="text-align:center">
+    {% if first %}
+    <a href="?page=1">1</a>
+    {% endif %} {% if left %} {% if left_dian%}
+    <span>...</span>
+    {% endif %} {% for i in left %}
+    <a href="?page={{ i }}">{{ i }}</a>
+    {% endfor %} {% endif %}
+    <a href="?page={{ page_obj.number }}" style="background: rgb(116, 79, 187)">{{ page_obj.number }}</a>
+    {% if right %} {% for i in right %}
+    <a href="?page={{ i }}">{{ i }}</a>
+    {% endfor %} {% if right_dian%}
+    <span>...</span>
+    {% endif %} {% endif %} {% if last %}
+    <a class='current-page' href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
+    {% endif %}
+</div>
+{% endif %} {%endblock center%} {%block bottom%} {%load blog_tags%}
+<div class="widget widget-recent-posts">
+    <h3 class="widget-title">最新文章</h3>
+    <ul>
+        {%get_newtitle as get_newtitle%} {%for list in get_newtitle%}
+        <li>
+            <span class="glyphicon glyphicon-chevron-right"></span><a href="{{list.get_absolute_url}}">{{list.title}}</a>
+        </li>
+        {%empty%} 当前没有文章哦！ {%endfor%}
+    </ul>
+</div>
+<div class="widget widget-archives">
+    <h3 class="widget-title">归档</h3>
+    <ul>
+        {%get_guidang as get_guidang%} {%for list in get_guidang%}
+        <li>
+            <span class="glyphicon glyphicon-chevron-right"></span><a href="{%url 'blogapp:guidang' list.year list.month%}">{{list.year}}年{{list.month}}月{{list.day}}日</a>
+        </li>
+
+        {%endfor%}
+
+    </ul>
+</div>
+
+<div class="widget widget-category">
+    <h3 class="widget-title">分类</h3>
+    <ul>
+        {%get_category as get_category%} {%for list_1 in get_category%}
+        <li>
+            <span class="glyphicon glyphicon-chevron-right"></span> <a href="{{list_1.get_absolute_url}}">{{list_1.name}}<span
+                    class="{{list_1.num_count}}">({{list_1.num_count}})</span></a>
+        </li>
+        {%endfor%}
+    </ul>
+</div>
+
+<div class="widget widget-tag-cloud">
+    <h3 class="widget-title">标签云</h3>
+    {%get_tag as get_tag%}
+    <ul>
+        {%for i in get_tag%}
+        <li>
+            <a href="{{i.get_absolute_url}}">{{i.name}}</a>
+        </li>
+            </ul>
+            {%endfor%}
+</div>
+<div class="rss">
+    <a href=""><span class="ion-social-rss-outline"></span> RSS 订阅</a>
+</div>
+{%endblock bottom%}

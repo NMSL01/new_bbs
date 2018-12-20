@@ -1,0 +1,152 @@
+
+		.default {
+			height: 50px;
+		}
+
+		.top {
+			background: white;
+			height: 50px;
+			border-top: 2px solid rgb(250, 125, 60);
+			border-bottom: 1px solid darkgrey;
+			position: fixed;
+			top: 0px;
+			width: 100%;
+			z-index: 99;
+		}
+
+		.top_container {
+			width: 1280px;
+			height: 50px;
+			margin: 0px auto;
+			position: relative;
+		}
+
+		.top_container img,
+		.search_line {
+			float: left;
+		}
+
+		.top_container img {
+			width: 140;
+			height: 48px;
+			margin-left: 50px;
+			margin-right: 20px;
+		}
+
+		.top_container input {
+			width: 425px;
+			height: 20px;
+			padding: 4px 33px 4px 10px;
+			margin-top: 9px;
+			background: rgb(242, 242, 245);
+			border: 1px solid rgb(204, 204, 204);
+		}
+
+		.search_line {
+			position: relative;
+			width: auto;
+		}
+
+		#search_icon {
+			height: 28px;
+			margin: 0px;
+			position: absolute;
+			right: 1px;
+			top: 10px
+		}
+
+		.top_navall {
+			width:600px ;
+			height: 50px;
+			float: right;
+			overflow: hidden;
+		}
+
+		.top_nav {
+			float: left;
+		}
+
+		.top_nav ul {
+			padding: 0px;
+			margin: 0px;
+			list-style: none;
+		}
+
+		.top_nav li {
+			float: left;
+			margin-left: 26px
+		}
+
+		.top_nav a {
+			text-decoration: none;
+		}
+
+		.top_nav a:link {
+			color: black;
+		}
+
+		.top_nav a:visited {
+			color: black;
+		}
+
+		.top_nav a:hover {
+			color: orange;
+		}
+
+		.top_nav a:active {
+			color: orange;
+		}
+
+		.top_nav {
+			margin: 11px 18px 11px 0px;
+			width: 288px;
+			height: 26px;
+		}
+
+		.top_login {
+			float: right;
+			height: 27px;
+			margin-top: 11px;
+			margin-bottom: 10px;
+		}
+
+		.top_login ul {
+			padding: 0px;
+			margin: 0px;
+			list-style: none;
+		}
+
+		.top_login li {
+			float: left;
+			margin-left: 14;
+			margin-right: 15px;
+		}
+
+		.top_login a {
+			text-decoration: none;
+		}
+
+		.top_login a:link {
+			color: black;
+		}
+
+		.top_login a:visited {
+			color: black;
+		}
+
+		.top_login a:hover {
+			color: orange;
+		}
+
+		.top_login a:active {
+			color: orange;
+		}
+
+		.list_line {
+			color: rgb(217, 217, 217)
+		}
+
+		.center {
+			margin: 62px auto 0px;
+			text-align: center;
+		}

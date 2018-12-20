@@ -1,0 +1,239 @@
+{% extends "bbsapp/base.html" %}
+{%load staticfiles%}
+{%block href%}
+	<link rel="stylesheet" href="{% static 'text/css/lol_index.css' %}" type="text/css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!--<script src="{%static 'text/js/textarea.js'%}"></script>-->
+    <script src="{%static '/text/js/kindeditor/kindeditor-all-min.js'%}"></script>
+    <script src="{%static '/text/js/kindeditor/lang/zh-CN.js'%}"></script>
+    <script src="{%static '/text/js/kindeditor/config.js'%}"></script>
+	<script>
+		function magnify(a){
+				a.siblings('img').hide()
+				a.css({							
+						height:'300px',
+						width:'550px'
+					})
+			}
+		function shrink(a){
+			a.siblings('img').show()
+			a.css({							
+					width:'160px',
+					height:'106px'
+				})
+		}
+		$(function(){
+			// 以下为动画效果
+			if($(this).scrollTop()!=0 || ! /lol_index$/.test(window.location.href)){
+					$('#top_video').hide()
+				}			
+			window.onscroll=function(){					
+				if($(this).scrollTop()!=0){						
+					$('#top_video').fadeOut()
+				}
+			}
+		});
+	</script>
+	<style>
+		.topVid{
+			width: 1920px;请输入内容
+			position: absolute;
+			margin-left: -960px;
+			left: 50%;
+			overflow: hidden;
+			z-index: 98;
+		}
+	</style>
+{%endblock href%}
+		
+{%block center%}
+		<div style='height: 50px;width: 100%;'></div>
+		<div class="main clearfix">
+			<!--<div id='top_video'>-->
+				<!--<video class="topVid" preload="auto" autoplay="autoplay" loop="loop" muted="" >-->
+	                <!--<source src="{% static '/text/image/video1.mp4' %}">-->
+	            <!--</video>-->
+			<!--</div>-->
+			<div class="center clearfix">
+				<div class='top_head'>
+					<div class="head_img">
+						<img class='h_i' src="{% static 'text/image/lol_logo.png' %}" style="height: 150px;margin: 10px 10px -10px 10px">
+						<img class='h_i' src="{% static 'text/image/title_content.png' %}" style="height: 50px;margin: 10px 10px -10px 10px">
+					</div>
+				</div>
+				<div class='top_main_nav'>
+					英雄联盟讨论区&nbsp;&nbsp;&nbsp;
+					<span id='span1'>今日：20 | 主题：170</span><br>
+					<span id='span2'>版主：高维</span>
+				</div>
+				<div class='top_main_box'>
+					<div class='top_main_box_line'>
+						a
+					</div>
+
+            <!--分页-->
+                <div id="pagination" style="text-align:center;overflow: hidden" class="top_navigator">
+                    <nav aria-label="Page navigation">
+                    <ul id="pages" class="pagination pagination-sm pagination-xs">
+                    {%if  is_paginated%}
+                    {%if page_obj.number != 1%}
+                        <li><a href="{{a_list.0.category.get_absolute_url}}?page={{page_obj.number | add:-1}}">上一页</a></li>
+                    {%endif%}
+                    {% if first %}
+                    <li><a href="{{a_list.0.category.get_absolute_url}}?page=1">1</a></li>
+                    {% endif %} {% if left %} {% if left_dian%}
+                    <li><span>...</span></li>
+                    {% endif %} {% for i in left %}
+                    <li><a href="{{a_list.0.category.get_absolute_url}}?page={{ i }}">{{ i }}</a></li>
+                    {% endfor %} {% endif %}
+                    <li><a href="javascript:;" style="color:#26ceff">{{ page_obj.number }}</a>
+                    {% if right %} {% for i in right %}
+                    <li><a href="{{a_list.0.category.get_absolute_url}}?page={{ i }}">{{ i }}</a></li>
+                    {% endfor %} {% if right_dian%}
+                    <li><span>...</span></li>
+                    {% endif %} {% endif %} {% if last %}
+                    <li><a class='current-page' href="{{a_list.0.category.get_absolute_url}}?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a></li>
+                    {% endif %}
+                    {%if page_obj.number != paginator.num_pages%}
+                    <li><a href="{{a_list.0.category.get_absolute_url}}?page={{page_obj.number | add:1}}">下一页</a></li>
+                    {%endif%}
+                    {%endif%}
+                    </ul>
+                        </nav>
+                </div>
+					<!----------------------------------------------------------------->
+					<div class="category_line">
+						<ul class="clearfix">
+							<a href=''><li>全部</li></a>
+							<a href=''><li>讨论</li></a>
+							<a href=''><li>战报</li></a>
+							<a href=''><li>视频</li></a>
+						</ul>
+					</div>
+					<div class="theme_box">
+						<div class="theme_box_toolsbar">
+							</a>&nbsp<a href="">全部时间<span id='triangle'></span></a>&nbsp&nbsp&nbsp<a href="/lol_index_desc" id='desc_arrange'>正序<span id='triangle'></span></a>&nbsp&nbsp&nbsp<a href="">精华</a>&nbsp;|&nbsp;<a href="">推荐</a>
+						</div>
+						<div class="top_theme">
+							{%load category_tag%}
+							{% for a in a_list %}
+							<div class='theme clearfix'>
+								<div class="comment_num">
+                                    <!--评论数量-->
+									{{ a.comment_set.all.count }}
+								</div>
+								<div class="theme_text">
+									<!--标题-->
+									<span><a href="{{a.get_absolute_url}}">{{ a.title }}</a></span><br/>
+									<!--自定义标签拿到列表值,放置最多三张图片-->
+									{%index only_image forloop.counter0 as n%}
+                                    {{n | safe}}
+									<!--<span>{{ a.content | safe }}...</span>-->
+								</div>
+								<div class="theme_author">
+									<span><a href=''><i class="fa fa-user-circle" aria-hidden="true">&nbsp&nbsp</i>{{ a.user.username }}</a></span>
+									&nbsp&nbsp{{a.startime | date:'Y-m-d'}}
+									<br/>
+                                    <!--如果评论存在显示评论最后一个用户名-->
+									{% if a.comment_set.exists %}
+									<span><a href=''><i class="fa fa-commenting-o" aria-hidden="true">&nbsp&nbsp</i>{{ a.comment_set.last.user.username }}</a></span>&nbsp&nbsp<span>
+									</span>
+									<!--否则显示作者-->
+									{% else %}
+									<span><a href=''><i class="fa fa-commenting-o" aria-hidden="true">&nbsp&nbsp</i>{{ a.user.username }}</a></span>&nbsp&nbsp<span>
+									{% endif %}
+								</div>
+								<div class="clearfix"></div>
+								<div class='theme_img'>
+									{% for img in a.image.all %}
+									<img src="/static/media/{{img.image}}"/>
+									{% empty %}
+									{% endfor %}
+								</div>
+							</div>
+							{% empty %}
+							暂无帖子	
+							{% endfor %}
+
+
+						  <!--分页-->
+                <div id="pagination" style="text-align:center;overflow: hidden" class="top_navigator">
+                    <nav aria-label="Page navigation">
+                    <ul id="pages" class="pagination pagination-sm pagination-xs">
+                    {%if  is_paginated%}
+                    {%if page_obj.number != 1%}
+                        <li><a href="{{a_list.0.category.get_absolute_url}}?page={{page_obj.number | add:-1}}">上一页</a></li>
+                    {%endif%}
+                    {% if first %}
+                    <li><a href="{{a_list.0.category.get_absolute_url}}?page=1">1</a></li>
+                    {% endif %} {% if left %} {% if left_dian%}
+                    <li><span>...</span></li>
+                    {% endif %} {% for i in left %}
+                    <li><a href="{{a_list.0.category.get_absolute_url}}?page={{ i }}">{{ i }}</a></li>
+                    {% endfor %} {% endif %}
+                    <li><a href="javascript:;" style="color:#26ceff">{{ page_obj.number }}</a>
+                    {% if right %} {% for i in right %}
+                    <li><a href="{{a_list.0.category.get_absolute_url}}?page={{ i }}">{{ i }}</a></li>
+                    {% endfor %} {% if right_dian%}
+                    <li><span>...</span></li>
+                    {% endif %} {% endif %} {% if last %}
+                    <li><a class='current-page' href="{{a_list.0.category.get_absolute_url}}?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a></li>
+                    {% endif %}
+                    {%if page_obj.number != paginator.num_pages%}
+                    <li><a href="{{a_list.0.category.get_absolute_url}}?page={{page_obj.number | add:1}}">下一页</a></li>
+                    {%endif%}
+                    {%endif%}
+                    </ul>
+                        </nav>
+                </div>
+							<!--*******************************************************************-->
+							<div class='create_theme'>
+								<span>发表评论 | 发起投票</span><br>
+								  <form action="{{a_list.0.category.get_absolute_url2}}" method="post" onsubmit="return check()">
+                                    <div class="comment_bot_title">
+                                   <div class="input-group input-group-sm">
+                                      <span class="input-group-addon" id="sizing-addon3">标题</span>
+                                      <input onchange="title_1('.form-control')" type="text" class="form-control"  name="title" placeholder="请输入标题..." aria-describedby="sizing-addon3">
+                                    </div>
+										<span class="error_form"></span>
+                                    	<br>
+                                    </div>
+                                <div class="comment_bot_context">
+                                    <textarea name="content" id="id_content" cols="30" rows="10"></textarea>
+                                    <button type="submit" class="btn btn-primary btn-sm" >发表</button>
+                                </div>
+								  </form>
+                            </div>
+					</div>
+				</div>
+			</div>
+		</div>						 
+		<div class="reflash_button "><a href='javascript:void(0)'><i class='fa fa-refresh'></i></a></div>
+		<div class="top_button "><a href='#top'><i class='fa fa-toggle-up'></i></a></div>
+	
+	<script>
+        function title_1(me) {
+            	if($(me).val()==''){
+            	    $('.error_form').html('标题不能为空！')
+            	    return false
+				}
+            	else{
+            	    $('.error_form').html('')
+            	    return true
+				}
+
+            }
+		function check(){
+            var result=title_1('.form-control')
+			return result
+		}
+		$('.theme img').each(function() {
+					var f=1
+					$(this).click(function(){
+						a=$(this)
+						if(f==1){magnify(a)}else if(f==-1){shrink(a)}
+						f*=-1
+						})
+				});
+	</script>
+{%endblock center%}

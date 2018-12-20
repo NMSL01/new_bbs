@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../djano_天天生鲜/.idea/djano_天天生鲜.iml" filepath="$PROJECT_DIR$/../djano_天天生鲜/.idea/djano_天天生鲜.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/mygit.iml" filepath="$PROJECT_DIR$/.idea/mygit.iml" />
+    </modules>
+  </component>
+</project>

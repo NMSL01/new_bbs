@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../static/booktest/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+    <ul>
+        {%for i in list%}
+        <li>{{i.uname}}</li>
+        {%endfor%}
+        <br>
+        {%for i in page%}
+        {%if list.number == i%}
+        {{i}} 
+       {% else %}
+       <a href="/page/{{i}}">{{i}}</a> 
+       {%endif%}
+        {%endfor%}
+    </ul>
+</body>
+</html>

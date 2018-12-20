@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../static/booktest/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            $('#d1').focus(function(){
+                $.get('/area/0',function(data){
+                    $list=data.list
+                    $('#d1').children().eq(0).siblings().remove()
+                    $('#d3').children().eq(0).siblings().remove()
+                    show_1($list,"#d1")
+                })
+        })
+            $('#d1').change(function(){
+                $value=$('#d1:nth-child(1)').val()
+                $.post('/area/1',{'num':$value},function(data2){
+                        $list=data2.list
+                        $('#d2').children().eq(0).siblings().remove()
+                        show_1($list,'#d2')
+                    })
+                })
+
+            $('.d2').change(function(){
+                $value1=$(this).val()
+                $.post('/area/2',{'num':$value1},function(data2){
+                        $list=data2.list
+                        $('#d3').children().eq(0).siblings().remove()
+                        show_1($list,'#d3')
+                    })
+                })
+            
+            function show_1(list,se){
+                $.each(list,function(index,index2){
+                    var $op='<option value='+index2[0]+'>'+index2[1]+'</option>'
+                    $(se).append($op)
+                })
+            }
+        })
+    
+    </script>
+</head>
+<body>
+    <select name="" id="d1">
+        <option value="">请选择省</option>
+    </select>
+    <select name="" id="d2" class="d2">
+        <option value="">请选择市</option>
+    </select>
+    <select name="" id="d3">
+        <option value="">请选择县</option>
+    </select>
+</body>
+</html>

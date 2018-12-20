@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {#这是一个注释#}
+    {%comment%}
+    zhushi
+    {%endcomment%}
+    <ul>
+        {#url反向解析,动态生成链接#}
+        <a href="{%url 'booktest:show' '123'%}">展示</a>
+        {%for book in list%}    
+        {%if forloop.counter|divisibleby:"2"%}
+        <li style="color:red">{{book.btitle}}</li>
+        {%else%}
+        <li style="color:blue">{{book.btitle}}</li>
+        {%endif%}
+        {%endfor%}
+
+
+    </ul>
+</body>
+</html>
